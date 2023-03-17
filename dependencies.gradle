@@ -1,0 +1,38 @@
+def versions = [
+        jackson  : '2.14.2',
+        junit    : '5.9.2',
+        lombok   : '1.18.24',
+        mapstruct: '1.5.3.Final',
+        mockito  : '5.2.0',
+        slf4j    : '2.0.6',
+        spring   : '5.3.25'
+]
+
+ext {
+    libs = [
+            jackson  : [
+                    databind: "com.fasterxml.jackson.core:jackson-databind:$versions.jackson",
+                    datatype: [
+                            jsr310: "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$versions.jackson"
+                    ]
+            ],
+            junit    : [
+                    api   : "org.junit.jupiter:junit-jupiter-api:$versions.junit",
+                    engine: "org.junit.jupiter:junit-jupiter-engine:$versions.junit"
+            ],
+            lombok   : "org.projectlombok:lombok:$versions.lombok",
+            mapstruct: [
+                    core     : "org.mapstruct:mapstruct:$versions.mapstruct",
+                    processor: "org.mapstruct:mapstruct-processor:$versions.mapstruct"
+            ],
+            mockito  : [
+                    jupiter: "org.mockito:mockito-junit-jupiter:$versions.mockito"
+            ],
+            slf4j    : [
+                    simple: "org.slf4j:slf4j-simple:$versions.slf4j"
+            ],
+            spring   : [
+                    web: "org.springframework:spring-web:$versions.spring"
+            ]
+    ]
+}

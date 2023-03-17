@@ -1,0 +1,39 @@
+apply from: 'dependencies.gradle'
+
+subprojects {
+    apply plugin: 'java'
+
+    group rootProject.group
+    version rootProject.version
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        // JUnit
+        testImplementation libs.junit.api
+        testRuntimeOnly libs.junit.engine
+
+        // Mockito
+        testImplementation libs.mockito.jupiter
+
+        // Lombok
+        annotationProcessor libs.lombok
+        compileOnly libs.lombok
+        testAnnotationProcessor libs.lombok
+        testCompileOnly libs.lombok
+
+        // SLF4J for tests
+        testImplementation libs.slf4j.simple
+    }
+
+    test {
+        useJUnitPlatform()
+        testLogging {
+            showStandardStreams false
+            events 'passed', 'skipped', 'failed'
+        }
+    }
+}

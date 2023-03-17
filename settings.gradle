@@ -1,0 +1,3 @@
+rootProject.name = 'stackexchange-demo'
+include 'middleware'
+include 'stackexchange-client'
