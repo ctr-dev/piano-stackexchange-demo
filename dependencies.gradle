@@ -1,11 +1,12 @@
 def versions = [
-        jackson  : '2.14.2',
-        junit    : '5.9.2',
-        lombok   : '1.18.24',
-        mapstruct: '1.5.3.Final',
-        mockito  : '5.2.0',
-        slf4j    : '2.0.6',
-        spring   : '5.3.25'
+        jackson   : '2.14.2',
+        junit     : '5.9.2',
+        lombok    : '1.18.24',
+        mapstruct : '1.5.3.Final',
+        mockito   : '5.2.0',
+        slf4j     : '2.0.6',
+        spring    : '5.3.25',
+        springBoot: '2.7.9'
 ]
 
 ext {
@@ -32,7 +33,10 @@ ext {
                     simple: "org.slf4j:slf4j-simple:$versions.slf4j"
             ],
             spring   : [
-                    web: "org.springframework:spring-web:$versions.spring"
+                    boot: [
+                            web: "org.springframework.boot:spring-boot-starter-web:$versions.springBoot"
+                    ],
+                    web : "org.springframework:spring-web:$versions.spring"
             ]
     ]
 }

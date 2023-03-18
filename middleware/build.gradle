@@ -1,0 +1,10 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.9'
+}
+
+dependencies {
+    annotationProcessor libs.mapstruct.processor
+    implementation project(':stackexchange-client')
+    implementation libs.mapstruct.core
+    implementation libs.spring.boot.web
+}
