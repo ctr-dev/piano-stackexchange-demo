@@ -2,6 +2,13 @@ plugins {
     id 'org.springframework.boot' version '2.7.9'
 }
 
+// Attach web UI
+processResources.dependsOn(':ui:npm_install', ':ui:npm_run_build')
+
+bootJar {
+    launchScript()
+}
+
 dependencies {
     annotationProcessor libs.mapstruct.processor
     implementation project(':stackexchange-client')
