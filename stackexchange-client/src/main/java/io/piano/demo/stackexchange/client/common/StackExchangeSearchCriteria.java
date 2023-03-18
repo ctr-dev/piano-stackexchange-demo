@@ -10,4 +10,6 @@ public class StackExchangeSearchCriteria {
 
     @NonNull String query;
 
+    @NonNull Integer limit;
+
 }

@@ -42,6 +42,7 @@ class StackExchangeHttpClientMockTest extends BaseTest {
             .then(answer -> ResponseEntity.ok(readResource("json/single-item-response.json.gz")));
         StackExchangeSearchCriteria searchCriteria = StackExchangeSearchCriteria.builder()
             .query("java")
+            .limit(5)
             .build();
         StackExchangeSearchResponseHttpDto response = testable.search(searchCriteria);
         assertNotNull(response);
@@ -55,6 +56,7 @@ class StackExchangeHttpClientMockTest extends BaseTest {
             .then(answer -> ResponseEntity.ok(new byte[]{0, 0}));
         StackExchangeSearchCriteria searchCriteria = StackExchangeSearchCriteria.builder()
             .query("java")
+            .limit(5)
             .build();
         assertThrows(GZIPDecodeException.class, () -> testable.search(searchCriteria));
     }

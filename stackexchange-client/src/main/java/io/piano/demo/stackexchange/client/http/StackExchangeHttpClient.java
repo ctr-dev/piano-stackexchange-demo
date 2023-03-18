@@ -28,10 +28,10 @@ public class StackExchangeHttpClient implements StackExchangeClient {
         URI url = UriComponentsBuilder.fromUri(properties.getHost())
             .path("/2.3/search")
             .queryParam("intitle", criteria.getQuery())
+            .queryParam("pagesize", criteria.getLimit())
             .queryParam("site", "stackoverflow")
             .queryParam("order", "desc")
             .queryParam("sort", "activity")
-            .queryParam("pagesize", 5)
             .build()
             .toUri();
         RequestEntity<Void> requestEntity = new RequestEntity<>(HttpMethod.GET, url);

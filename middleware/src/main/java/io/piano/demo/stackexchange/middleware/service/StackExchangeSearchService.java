@@ -18,8 +18,11 @@ public class StackExchangeSearchService {
     private final StackExchangeSearchMapper stackExchangeSearchMapper;
     private final StackExchangeClient client;
 
-    public Collection<StackExchangeSearchItemDto> execute(String query) {
-        StackExchangeSearchCriteria criteria = StackExchangeSearchCriteria.builder().query(query).build();
+    public Collection<StackExchangeSearchItemDto> execute(String query, int limit) {
+        StackExchangeSearchCriteria criteria = StackExchangeSearchCriteria.builder()
+            .query(query)
+            .limit(limit)
+            .build();
         StackExchangeSearchResponseHttpDto response = client.search(criteria);
         return response.getItems().stream()
             .map(stackExchangeSearchMapper::toDto)

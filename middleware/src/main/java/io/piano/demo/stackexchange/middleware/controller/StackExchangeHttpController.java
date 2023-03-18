@@ -22,9 +22,10 @@ public class StackExchangeHttpController {
 
     @GetMapping("/search")
     public Collection<StackExchangeSearchItemHttpDto> search(
-        @RequestParam("query") String query
+        @RequestParam(name = "query") String query,
+        @RequestParam(name = "limit", required = false, defaultValue = "5") int limit
     ) {
-        return stackExchangeSearchService.execute(query).stream()
+        return stackExchangeSearchService.execute(query, limit).stream()
             .map(stackExchangeSearchMapper::toHttp)
             .collect(Collectors.toUnmodifiableList());
     }
