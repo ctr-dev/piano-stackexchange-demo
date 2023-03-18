@@ -1,0 +1,8 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.9'
+}
+
+dependencies {
+    implementation project(':stackexchange-client')
+    implementation libs.spring.boot.web
+}
