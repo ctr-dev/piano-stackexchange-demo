@@ -3,7 +3,7 @@ plugins {
 }
 
 // Attach web UI
-processResources.dependsOn(':ui:npm_install', ':ui:npm_run_build')
+processResources.dependsOn(':ui:npmInstall', ':ui:npm_run_build')
 
 bootJar {
     launchScript()

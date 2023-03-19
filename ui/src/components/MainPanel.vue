@@ -1,8 +1,10 @@
 <template>
   <div class="main-panel">
-    <div>Query: <input type="text" v-model="query"></div>
-    <div>Limit: <input type="number" v-model="limit"></div>
-    <button v-on:click="load()">Process</button>
+    <div class="settings">
+      <div class="input-row">Query: <input type="text" v-model="query"></div>
+      <div class="input-row">Limit: <input type="number" v-model="limit"></div>
+      <button v-on:click="load()">Process</button>
+    </div>
     <table v-if="this.items.length > 0">
       <tr>
         <th></th>
@@ -30,45 +32,59 @@ export default {
   data() {
     return {
       query: '',
-      limit: 5,
+      limit: 20,
       items: []
     }
   },
   methods: {
     load() {
       fetch('/stack-exchange/search?query=' + this.query + '&limit=' + this.limit)
-        .then(response => response.json())
-        .then(items => this.items = items)
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            alert(response.statusText)
+            throw new Error(response.statusText)
+          }
+        })
+        .then(items => {
+          if (items.length == 0) {
+            alert('No results')
+          } else {
+            this.items = items
+          }
+        })
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.settings {
+  text-align: left;
+  width: 100%;
+  padding: 0.3em;
+}
+
 .answered {
   font-weight: bold;
   color: #325f4b;
 }
+
 .link {
   font-weight: normal;
-  color: #325f4b;
+  color: #315e4a;
 }
+
 table {
+  width: 100%;
   background-color: #fcfcfc;
 }
 
-h3 {
-  margin: 40px 0 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-</style>
+table,
+th,
+td {
+  padding: 0.3em;
+  border: 1px solid #87f0c1;
+  border-collapse: collapse;
+}</style>
