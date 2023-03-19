@@ -6,6 +6,7 @@ import io.piano.demo.stackexchange.client.http.dto.StackExchangeSearchResponseHt
 import io.piano.demo.stackexchange.client.util.GZIPUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.Objects;
 
+@Slf4j
 @RequiredArgsConstructor
 @SuppressWarnings("SpellCheckingInspection")
 public class StackExchangeHttpClient implements StackExchangeClient {
@@ -25,6 +27,7 @@ public class StackExchangeHttpClient implements StackExchangeClient {
     @SneakyThrows
     @Override
     public StackExchangeSearchResponseHttpDto search(StackExchangeSearchCriteria criteria) {
+        log.info("Search {}", criteria);
         URI url = UriComponentsBuilder.fromUri(properties.getHost())
             .path("/2.3/search")
             .queryParam("intitle", criteria.getQuery())
@@ -40,10 +43,12 @@ public class StackExchangeHttpClient implements StackExchangeClient {
             requestEntity,
             byte[].class
         );
-        return GZIPUtil.decode(
+        StackExchangeSearchResponseHttpDto response = GZIPUtil.decode(
             Objects.requireNonNull(responseEntity.getBody()),
             StackExchangeSearchResponseHttpDto.class
         );
+        log.info("Search done, found {} items for {}", response.getItems().size(), criteria);
+        return response;
     }
 
 }

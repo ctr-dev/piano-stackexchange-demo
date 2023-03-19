@@ -4,7 +4,7 @@ def versions = [
         lombok    : '1.18.24',
         mapstruct : '1.5.3.Final',
         mockito   : '5.2.0',
-        slf4j     : '2.0.6',
+        slf4j     : '1.7.26',
         spring    : '5.3.25',
         springBoot: '2.7.9'
 ]
@@ -30,6 +30,7 @@ ext {
                     jupiter: "org.mockito:mockito-junit-jupiter:$versions.mockito"
             ],
             slf4j    : [
+                    api   : "org.slf4j:slf4j-api:$versions.slf4j",
                     simple: "org.slf4j:slf4j-simple:$versions.slf4j"
             ],
             spring   : [

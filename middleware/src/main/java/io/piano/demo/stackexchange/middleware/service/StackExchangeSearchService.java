@@ -6,12 +6,14 @@ import io.piano.demo.stackexchange.client.http.dto.StackExchangeSearchResponseHt
 import io.piano.demo.stackexchange.middleware.service.dto.out.StackExchangeSearchItemDto;
 import io.piano.demo.stackexchange.middleware.util.mapper.StackExchangeSearchMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class StackExchangeSearchService {
 
@@ -19,6 +21,7 @@ public class StackExchangeSearchService {
     private final StackExchangeClient client;
 
     public Collection<StackExchangeSearchItemDto> execute(String query, int limit) {
+        log.info("Start search for query {} with limit {}", query, limit);
         StackExchangeSearchCriteria criteria = StackExchangeSearchCriteria.builder()
             .query(query)
             .limit(limit)
