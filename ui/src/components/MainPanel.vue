@@ -1,8 +1,8 @@
 <template>
   <div class="main-panel">
     <div class="settings">
-      <div class="input-row">Query: <input type="text" v-model="query"></div>
-      <div class="input-row">Limit: <input type="number" v-model="limit"></div>
+      <div class="input-row">Query<input type="text" v-model="query"></div>
+      <div class="input-row">Limit<input type="number" v-model="limit"></div>
       <button v-on:click="load()">Process</button>
     </div>
     <table v-if="this.items.length > 0">
@@ -43,7 +43,7 @@ export default {
           if (response.ok) {
             return response.json()
           } else {
-            alert(response.statusText)
+            alert('Error')
             throw new Error(response.statusText)
           }
         })
@@ -64,6 +64,32 @@ export default {
   text-align: left;
   width: 100%;
   padding: 0.3em;
+  margin: 0.3em;
+}
+
+.input-row {
+  font-size: 1.2em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+.input-row input {
+  display: block;
+  font-size: 1em;
+}
+
+.settings button {
+  border: 1px solid rgb(18, 90, 60);
+  border-radius: 0.5em;
+  font-size: 1em;
+  padding: 0.5em;
+  background-color: #7ff1be;
+  transition: 0.3s;
+}
+
+.settings button:hover {
+  transition: 0.3s;
+  background-color: #b5fadb;
 }
 
 .answered {
